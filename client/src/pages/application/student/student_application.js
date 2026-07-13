@@ -158,9 +158,6 @@ const StudentApplication = () => {
       </p>
       <h3>Application</h3>
       <FormControl>
-        {/* <FormLabel id="radio-button-group-label">
-          <h3>Application</h3>
-        </FormLabel> */}
         <RadioGroup
           name="radio-submitted-cupe-app"
           value={displayCupeHint}
@@ -325,13 +322,6 @@ const StudentApplication = () => {
       <h3>Course Preferences</h3>
       <Alert severity="info">
         <p>
-          Due to a current review of the application process, course preferences
-          are not listed in this page this term. Please ensure that your TA
-          application at the CUPE jobs page or via email includes a list of the
-          courses for which you are interested, qualified, and available.
-        </p>
-        {/*
-         <p>
           Note that this list is provided to gather your general interests.
           There is no guarantee that all these courses will hire TAs, and there
           is no guarantee we will be able to provide you with your first
@@ -397,10 +387,8 @@ const StudentApplication = () => {
                   have none of the skills, experience or knowledge relevant for
                   the assignment, or you are opposed to learning them. You would
                   reject an offer for this assignment regardless of the
-                  situation.
-                  <em>Unit 1 applicants</em>: note that choosing this option may
-                  affect your funding if none of the other courses you are
-                  qualified have availability.
+                  situation. Choosing this option may affect your funding if
+                  none of the other courses you are qualified have availability.
                 </>,
               ],
             ].map(([val, label]) => (
@@ -418,33 +406,31 @@ const StudentApplication = () => {
             ))}
           </ul>
         </details>
-           */}
       </Alert>
-      {Object.keys(appRows)?.map((key) => (
-        <div key={key}>
-          <h4>{key.charAt(0).toUpperCase() + key.slice(1)} Campus</h4>
-          <DatagridTable
-            key={key}
-            columns={columns}
-            idVarName={"code"}
-            loading={!appRows}
-            onEditStop={null}
-            processRowUpdate={updateRow}
-            rows={appRows[key] ?? []}
-            rowHeight={40}
-          />
-        </div>
-      ))}
-      {/* {console.log(appRows)} */}
-      {/* <DatagridTable
-        columns={columns}
-        idVarName={"code"}
-        loading={!appRows}
-        onEditStop={null}
-        processRowUpdate={updateRow}
-        rows={appRows ?? []}
-        rowHeight={40}
-      /> */}
+      {termApp?.funding !== null ? (
+        Object.keys(appRows)?.map((key) => (
+          <div key={key}>
+            <h4>{key.charAt(0).toUpperCase() + key.slice(1)} Campus</h4>
+            <DatagridTable
+              key={key}
+              columns={columns}
+              idVarName={"code"}
+              loading={!appRows}
+              onEditStop={null}
+              processRowUpdate={updateRow}
+              rows={appRows[key] ?? []}
+              rowHeight={40}
+            />
+          </div>
+        ))
+      ) : (
+        <Alert severity="info">
+          TA preferences for applicants without funding information must be
+          provided through the TA application process at CUPE info. Please make
+          sure to include all relevant information in that application or in
+          your CV.
+        </Alert>
+      )}
       <p />
       {"" + termApp?.availability === "0" && (
         <Alert severity="warning">
