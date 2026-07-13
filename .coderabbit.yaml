@@ -22,7 +22,7 @@ reviews:
     ignore_title_keywords: []
     drafts: false
     base_branches:
-      - master
+      - main
     ignore_usernames:
       - dependabot[bot]
       - dependabot-preview[bot]
