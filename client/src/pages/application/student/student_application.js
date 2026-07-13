@@ -54,6 +54,13 @@ const columns = [
     renderCell: renderGridCellTooltip,
   },
   {
+    field: "details",
+    headerName: "Section Details",
+    width: 150,
+    headerClassName: "section-table-header",
+    renderCell: renderGridCellTooltip,
+  },
+  {
     field: "interest",
     headerName: "Interest",
     width: 150,

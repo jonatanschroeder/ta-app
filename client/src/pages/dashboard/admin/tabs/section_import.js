@@ -11,6 +11,7 @@ const SectionImportTab = () => {
     "Term",
     "Prof PPY User",
     "Campus",
+    "Details",
   ];
 
   return (
