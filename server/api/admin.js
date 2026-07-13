@@ -19,7 +19,7 @@ export function admin({ app, db, pgp }) {
           console.log("error fetching term data from DB:", error);
           res.status(500).send(error);
         });
-    })
+    }),
   );
 
   /**
@@ -43,7 +43,7 @@ export function admin({ app, db, pgp }) {
           console.log("error posting term to DB:", error);
           res.status(500).send(error);
         });
-    })
+    }),
   );
 
   /**
@@ -66,7 +66,7 @@ export function admin({ app, db, pgp }) {
           console.log("error fetching table list from DB:", error);
           res.status(500).send(error);
         });
-    })
+    }),
   );
 
   /**
@@ -93,7 +93,7 @@ export function admin({ app, db, pgp }) {
           console.log("error fetching table info for table:", tableName);
           res.status(500).send(error);
         });
-    })
+    }),
   );
 
   app.get(
@@ -110,7 +110,7 @@ export function admin({ app, db, pgp }) {
           console.log("error fetching table data for table:", tableName);
           res.status(500).send(error);
         });
-    })
+    }),
   );
 
   app.post(
@@ -123,32 +123,33 @@ export function admin({ app, db, pgp }) {
           return db.tx(async (t) => {
             const code = await t.oneOrNone(
               "SELECT id FROM course WHERE code=$1",
-              row
+              row,
             );
             if (!code) return { status: "fail", data: "No such course code" };
             const term = await t.oneOrNone(
               "SELECT id FROM term WHERE term=$3",
-              row
+              row,
             );
             if (!term) return { status: "fail", data: "No such term" };
             const instructor = await t.oneOrNone(
               // "SELECT id FROM users WHERE username=$4 AND usertype IN ('instructor', 'admin')",
               "SELECT users.id FROM users JOIN instructor ON instructor.id = users.id WHERE username=$4",
-              row
+              row,
             );
             if (!instructor)
               return { status: "fail", data: "No such instructor" };
 
             const dbQuery = `
-                    INSERT INTO section (course, letter, term, profid)
-                    SELECT course.id, $2, term.id, users.id
+                    INSERT INTO section (course, letter, term, profid, campus)
+                    SELECT course.id, $2, term.id, users.id, $5
                     FROM course, term, users
                     WHERE course.code = $1
                     AND term.term = $3
                     AND users.username = $4
                     AND users.usertype IN ('instructor', 'admin')
                     ON CONFLICT (course, letter, term) DO UPDATE SET
-                    profid = EXCLUDED.profid
+                    profid = EXCLUDED.profid,
+                    campus = EXCLUDED.campus
                     RETURNING 'success' as status, 'Success' as data
                     `;
             const ret = await t.oneOrNone(dbQuery, row);
@@ -223,7 +224,7 @@ export function admin({ app, db, pgp }) {
       //     console.log('error pushing section data:', error)
       //     res.status(500).send(error)
       // })
-    })
+    }),
   );
 
   /**
@@ -239,12 +240,12 @@ export function admin({ app, db, pgp }) {
           return db.tx(async (t) => {
             const code = await t.oneOrNone(
               "SELECT id FROM course WHERE code=$2",
-              row
+              row,
             );
             if (!code) return { status: "fail", data: "No such course code" };
             const term = await t.oneOrNone(
               "SELECT id FROM term WHERE term=$3",
-              row
+              row,
             );
             if (!term) return { status: "fail", data: "No such term" };
 
@@ -311,7 +312,7 @@ export function admin({ app, db, pgp }) {
       //         console.log('error pushing rofr data:', error)
       //         res.status(500).send(error)
       //     })
-    })
+    }),
   );
   // })
 
@@ -397,7 +398,7 @@ export function admin({ app, db, pgp }) {
       //         console.log('error upsert:', error)
       //         res.status(500).send(error)
       //     })
-    })
+    }),
   );
   //         .catch((error) => {
   //             res.status(400).send(error)
