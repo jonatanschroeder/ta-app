@@ -31,7 +31,6 @@ function GridCellSelectInput({ id, value, field }) {
     <Select
       value={value}
       onChange={handleChange}
-      onClick={handleChange}
       fullWidth
       native
     >

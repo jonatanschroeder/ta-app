@@ -31,7 +31,7 @@ const CHECK_NEW_TERM = "/api/applicant/term/new/";
 
 const DEBOUNCE_MS = 400;
 
-/** @type {GridColDef[]} */
+/** @type {import("@mui/x-data-grid").GridColDef[]} */
 const columns = [
   {
     field: "codename",
