@@ -34,7 +34,7 @@ import CustomTablerow from "../../../components/color_table_row";
 const CSVTable = (props) => {
   const [file, setFile] = useState(null);
   const [lastPostStatus, setLastPostStatus] = useState(null);
-  const [skipFirst, setSkipFirst] = useState(false);
+  const [skipFirst, setSkipFirst] = useState(true);
   const [meetsPostConditions, setMeetsPostConditions] = useState(true);
   const [postResults, setPostResults] = useState(null);
 
@@ -106,7 +106,7 @@ const CSVTable = (props) => {
         newData.push(
           <CustomTablerow color={color} key={idx}>
             {newRow}
-          </CustomTablerow>
+          </CustomTablerow>,
         );
       }
       return newData;
