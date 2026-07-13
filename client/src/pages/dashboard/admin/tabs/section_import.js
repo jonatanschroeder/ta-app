@@ -1,17 +1,23 @@
-import CSVTable from "./csv_table"
+import CSVTable from "./csv_table";
 
-const POST_URL = '/api/admin/section'
+const POST_URL = "/api/admin/section";
 const SectionImportTab = () => {
-    const body = {
-        rows: null,
-    }
-    const colHeaders = ['Course Code', 'Letter', 'Term', 'Prof PPY User']
+  const body = {
+    rows: null,
+  };
+  const colHeaders = [
+    "Course Code",
+    "Letter",
+    "Term",
+    "Prof PPY User",
+    "Campus",
+  ];
 
-    return (
-        <>
-            <CSVTable postBody={body} postURL={POST_URL} colHeaders={colHeaders} />
-        </>
-    )
-}
+  return (
+    <>
+      <CSVTable postBody={body} postURL={POST_URL} colHeaders={colHeaders} />
+    </>
+  );
+};
 
-export default SectionImportTab
+export default SectionImportTab;
