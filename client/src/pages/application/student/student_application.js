@@ -200,18 +200,27 @@ const StudentApplication = () => {
       </FormControl>
       {"" + displayCupeHint === "1" && (
         <Alert severity="info">
-          If you are unable to complete the application on the CUPE jobs web
-          page for any reason, please send an email to{" "}
-          <a href="mailto:vinguyen@yorku.ca">vinguyen@yorku.ca</a> with your CV
-          and a filled out application form.{" "}
-          <a
-            href="https://cupe3903.org/useful-forms-and-documents/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Click here
-          </a>{" "}
-          to access the application forms applicable to your case.
+          <p>
+            <strong>Unit 1 applicants:</strong> While an application on the CUPE
+            jobs is encouraged, it is not required. Your application is implied
+            based on the funding requirements submitted by your supervisor. You
+            do not need to submit an application on CUPE jobs at this point.
+          </p>
+          <p>
+            <strong>Unit 2 applicants:</strong> If you are unable to complete
+            the application on the CUPE jobs web page for any reason, please
+            send an email to{" "}
+            <a href="mailto:vinguyen@yorku.ca">vinguyen@yorku.ca</a> with your
+            CV and a filled out application form.{" "}
+            <a
+              href="https://cupe3903.org/useful-forms-and-documents/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Click here
+            </a>{" "}
+            to access the application forms applicable to your case.
+          </p>
         </Alert>
       )}
       <h3>Number of Hours</h3>
